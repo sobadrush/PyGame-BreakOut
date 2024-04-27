@@ -84,7 +84,7 @@ while running:
     # ======================================== 碰撞
 
     # 球 與 牆 的碰撞偵測
-    if ball.left <= 0 or ball.right >= screen_width:
+    if any or any: # To-Be-Filled: 球的 x 座標到達左右邊界時，將球的 x 軸移動方向反轉
         any # To-Be-Filled: 球的 x 座標到達左右邊界時，將球的 x 軸移動方向反轉
     if ball.top <= 0:
         any # To-Be-Filled: 球的 y 座標到達上邊界時，將球的 y 軸移動方向反轉

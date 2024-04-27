@@ -44,7 +44,7 @@ ball_speed_y = -4 # 球的 y 軸移動方向
 ball = pygame.Rect(ball_x, ball_y, ball_diameter, ball_diameter) # 使用 pygame.Rect 來表示球，(x, y, diameter, diameter)，以偵測碰撞
 
 # Bricks (磚塊的位置)
-bricks = []
+bricks_list = []
 for y in range(5):
     for x in range(screen_width // brick_width):
         
@@ -58,7 +58,12 @@ for y in range(5):
             brick_width, 
             brick_height
         )
-        bricks.append(brick)
+        
+        random_R_val = random.randint(0, 255)
+        random_G_val = random.randint(0, 255)
+        random_B_val = random.randint(0, 255)
+        
+        bricks_list.append({ "item": brick, "color": (random_R_val, random_G_val, random_B_val) })
 
 running = True
 while running:
@@ -77,11 +82,12 @@ while running:
     pygame.draw.ellipse(screen, color_green, ball) # pygame.draw.ellipse(畫布, 顏色, 物件)
     
     # 繪製磚塊
-    for brick in bricks:
+    for brick_rect in bricks_list:
         # pygame.draw.rect(screen, color_blue, brick) # pygame.draw.rect(畫布, 顏色, 物件)
-        pygame.draw.rect(screen, color_blue, [brick.left, brick.top, brick.width, brick.height]) # 也可以用這種方式
+        pygame.draw.rect(screen, brick_rect["color"], brick_rect["item"])
 
     # 更新視窗
+    screen.blit(scaled_image, ((screen_width // 2) - (background_image_ww // 2), screen_height // 2)) # 載入背景圖片
     pygame.display.flip() # 更新整個視窗或螢幕的內容
     pygame.time.Clock().tick(60) # 表示每秒執行 60 次迴圈。這樣做可以確保遊戲以每秒 60 幀的速率運行
 
@@ -112,9 +118,9 @@ while running:
         ball.y = player.top - ball_diameter # 碰撞後，將球的 y 座標設為平板的上方，以避免球卡在平板內
 
     # 球 與 磚塊 的碰撞偵測
-    for brick in bricks[:]:
-        if ball.colliderect(brick):
+    for brick_rect in bricks_list[:]:
+        if ball.colliderect(brick_rect["item"]):
             ball_speed_y *= -1
-            bricks.remove(brick)
+            bricks_list.remove(brick_rect)
 
 pygame.quit()

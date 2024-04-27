@@ -73,9 +73,9 @@ while running:
     # 平板的移動
     keys = pygame.key.get_pressed()
     # 平板的左移
-    if keys[pygame.K_LEFT] and any: # To-Be-Filled，請將條件補全
+    if keys[pygame.K_LEFT] and any: # To-Be-Filled，平板的 x 座標 >= 0
         player.x -= 5
-    # To-Be-Filled: 平板的右移
+    # To-Be-Filled: 平板的右移, 平板的 x 座標 + 平板的寬度 <= 視窗的寬度
 
     # 球的移動
     ball.x += ball_speed_x # rect物件.x，表示球的 x 座標

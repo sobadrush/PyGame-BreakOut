@@ -27,33 +27,23 @@ ball_radius = ball_diameter // 2 # 球的半徑
 
 # Player paddle (平板的位置)
 offset = 10
-player_x = (screen_width - player_width) // 2 # 平板的 x 座標，相當於 (screen_width / 2) - (player_width / 2)
-player_y = screen_height - player_height - offset
+player_x = any # To-Be-Filled
+player_y = any # To-Be-Filled
 player = pygame.Rect(player_x, player_y, player_width, player_height) # 使用 pygame.Rect 來表示平板，(x, y, width, height)，以偵測碰撞
 
 # Ball setup (球的位置)
-ball_x = screen_width // 2
-ball_y = player_y - ball_diameter
+ball_x = any # To-Be-Filled
+ball_y = any # To-Be-Filled
 ball_speed_x = 4 * random.choice([-1, 1]) # 隨機決定球的 x 軸移動方向
 ball_speed_y = -4 # 球的 y 軸移動方向
 ball = pygame.Rect(ball_x, ball_y, ball_diameter, ball_diameter) # 使用 pygame.Rect 來表示球，(x, y, diameter, diameter)，以偵測碰撞
 
 # Bricks (磚塊的位置)
 bricks = []
-for y in range(5):
-    for x in range(screen_width // brick_width):
-        
-        spacing1 = 10 # 磚塊之間的間距
-        spacing2 = 20 # 磚塊與視窗邊緣的間距
-        
-        # 定義每個小磚塊為 Rect 物件，以偵測碰撞
-        brick = pygame.Rect(
-            x * (brick_width + spacing1) + spacing2, 
-            y * (brick_height + spacing1) + spacing2, 
-            brick_width, 
-            brick_height
-        )
-        bricks.append(brick)
+# 使用 for 迴圈來建立磚塊 List
+# To-Be-Filled
+# To-Be-Filled
+# To-Be-Filled
 
 running = True
 while running:
@@ -63,18 +53,16 @@ while running:
             running = False
 
     # ======================================== 繪製畫面
-    screen.fill(color_black) # 若不加這行，球移動時會留下軌跡
+    # To-Be-Filled: BUG-FIX
     
     # 繪製平板
-    pygame.draw.rect(screen, color_red, player) # pygame.draw.rect(畫布, 顏色, 物件)
+    # To-Be-Filled, 提示：使用 pygame.draw.rect 來繪製平板
     
     # 繪製球
-    pygame.draw.ellipse(screen, color_green, ball) # pygame.draw.ellipse(畫布, 顏色, 物件)
-    
-    # 繪製磚塊
-    for brick in bricks:
-        # pygame.draw.rect(screen, color_blue, brick) # pygame.draw.rect(畫布, 顏色, 物件)
-        pygame.draw.rect(screen, color_blue, [brick.left, brick.top, brick.width, brick.height]) # 也可以用這種方式
+    # To-Be-Filled, 提示：使用 pygame.draw.ellipse 來繪製球
+        
+    # 繪製磚塊, 根據 「磚塊 List」+ 迴圈 來繪製磚塊
+    # To-Be-Filled: 提示：使用 pygame.draw.rect 來繪製磚塊
 
     # 更新視窗
     pygame.display.flip() # 更新整個視窗或螢幕的內容
@@ -84,10 +72,10 @@ while running:
 
     # 平板的移動
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and player.left > 0:
+    # 平板的左移
+    if keys[pygame.K_LEFT] and any: # To-Be-Filled，請將條件補全
         player.x -= 5
-    if keys[pygame.K_RIGHT] and player.right < screen_width:
-        player.x += 5
+    # To-Be-Filled: 平板的右移
 
     # 球的移動
     ball.x += ball_speed_x # rect物件.x，表示球的 x 座標
@@ -97,19 +85,19 @@ while running:
 
     # 球 與 牆 的碰撞偵測
     if ball.left <= 0 or ball.right >= screen_width:
-        ball_speed_x *= -1
+        any # To-Be-Filled: 球的 x 座標到達左右邊界時，將球的 x 軸移動方向反轉
     if ball.top <= 0:
-        ball_speed_y *= -1
+        any # To-Be-Filled: 球的 y 座標到達上邊界時，將球的 y 軸移動方向反轉
 
     # 球 與 平板 的碰撞偵測
     if ball.colliderect(player):
-        ball_speed_y *= -1
+        any # To-Be-Filled: 碰撞後，將球的 y 軸移動方向反轉
         ball.y = player.top - ball_diameter # 碰撞後，將球的 y 座標設為平板的上方，以避免球卡在平板內
 
     # 球 與 磚塊 的碰撞偵測
     for brick in bricks[:]:
-        if ball.colliderect(brick):
-            ball_speed_y *= -1
-            bricks.remove(brick)
+        if any: # To-Be-Filled: 球與磚塊碰撞偵測
+            any # To-Be-Filled: 碰撞後，將球的 y 軸移動方向反轉
+            any # To-Be-Filled: 碰撞後，移除磚塊
 
 pygame.quit()

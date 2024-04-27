@@ -10,6 +10,11 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('打磚塊 Breakout Clone')
 
+background_image = pygame.image.load('./Telearn.png') # 載入圖片作為背景
+background_image_ww, background_image_hh = (200, 200) # 取得圖片的大小
+scaled_image = pygame.transform.scale(background_image, (background_image_ww, background_image_hh)) # 縮放圖片
+
+
 # Define colors
 color_black = (0, 0, 0)
 color_white = (255, 255, 255)
